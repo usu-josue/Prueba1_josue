@@ -14,19 +14,21 @@ public class BDHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //CREACIÓN DE LAS TABLAS
-            db.execSQL("CREATE TABLE tblUsuarios"+"(" +
-                    "usu_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    "usu_nombre text NOT NULL,"+
-                    "usu_apellido text NOT NULL," +
-                    "usu_cedula integer NOT NULL,"+
-                    "usu_direccion text NOT NULL)");
+            db.execSQL("CREATE TABLE t_RolPagos"+"(" +
+                    "usu_funcionario PRIMARY KEY,"+
+                    "usu_cargo text NOT NULL,"+
+                    "usu_area text NOT NULL," +
+                    "usu_nHijos integer NOT NULL,"+
+                    "usu_estadoCivil text NOT NULL," +
+                    "usu_atraso text NOT NULL," +
+                    "usu_horasExtras integer NOT NULL)");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //CAMBIE LA VERSIÓN DE LA TABLA DE LA BDD
-        db.execSQL("DROP TABLE tblUsuarios");
+        db.execSQL("DROP TABLE t_RolPagos");
         onCreate(db);
     }
 }
