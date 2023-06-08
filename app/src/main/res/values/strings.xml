@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">EjemploSQLite</string>
+    <string name="txtETitulo">FORMULARIO DE USUARIO</string>
+    <string name="txtCedula">CI</string>
+    <string name="txtNombre">Nombres</string>
+    <string name="txtApellidos">Apellidos</string>
+    <string name="txtDireccion">Dirección</string>
+</resources>
