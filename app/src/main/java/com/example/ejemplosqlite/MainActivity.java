@@ -116,7 +116,9 @@ public class MainActivity extends AppCompatActivity {
         TextView horasEx = findViewById(R.id.set_txtHorasE);
         horasEx.setText(""+totalhoras);
 
+        float total = (sueldofijo-descuentosueldof)+bonificacion+totalhoras;
+        TextView mostrarfinal = findViewById(R.id.set_txtSueldoTotal);
+        mostrarfinal.setText(""+total);
 
-        
     }
 }
