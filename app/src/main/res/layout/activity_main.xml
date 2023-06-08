@@ -41,7 +41,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/txtCedula"
+        android:id="@+id/txtFuncionario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -83,7 +83,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/txtNombre"
+        android:id="@+id/txtCargo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -168,7 +168,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/txtApellidos"
+        android:id="@+id/txtArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -183,7 +183,7 @@
         tools:text="@string/txtApellidos" />
 
     <EditText
-        android:id="@+id/txtDireccion"
+        android:id="@+id/txtnHijos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -271,19 +271,6 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/set_txtSueldoTotal"
-        android:layout_width="201dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="186dp"
-        android:layout_marginLeft="186dp"
-        android:layout_marginTop="785dp"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/set_txtHorasE"
         android:layout_width="201dp"
         android:layout_height="wrap_content"
@@ -357,10 +344,50 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="786dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="838dp"
         android:text="Sueldo a recibir:"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtEDireccion13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="782dp"
+        android:text="Bonificación:"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/set_txtSueldoTotal"
+        android:layout_width="201dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="183dp"
+        android:layout_marginLeft="183dp"
+        android:layout_marginTop="837dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/set_txtBonificacion"
+        android:layout_width="201dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="183dp"
+        android:layout_marginLeft="183dp"
+        android:layout_marginTop="782dp"
         android:textSize="20sp"
         android:textStyle="bold" />
 
