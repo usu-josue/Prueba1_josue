@@ -5,4 +5,8 @@
     <string name="txtNombre">Nombres</string>
     <string name="txtApellidos">Apellidos</string>
     <string name="txtDireccion">Dirección</string>
+    <string name="txtEstadoCivil">Estado Civil</string>
+    <string name="txtAtraso">Si / No</string>
+    <string name="txtHorasExtras">Nro. Horas Extras</string>
+
 </resources>
