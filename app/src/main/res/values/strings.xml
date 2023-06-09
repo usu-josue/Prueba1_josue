@@ -2,7 +2,7 @@
     <string name="app_name">EjemploSQLite</string>
     <string name="txtETitulo">FORMULARIO DE USUARIO</string>
     <string name="txtFuncionario" translatable="false">Nombre funcionario</string>
-    <string name="txtCargo" translatable="false">Tipo cargo</string>
+    <string name="txtCargo" translatable="false">docente / administrativo</string>
     <string name="txtArea" translatable="false">Area pertenece</string>
     <string name="txtnHijos" translatable="false">Nro.hijos</string>
     <string name="txtEstadoCivil" translatable="false">Estado Civil</string>
