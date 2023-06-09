@@ -116,7 +116,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="13dp"
         android:layout_marginLeft="13dp"
-        android:layout_marginTop="365dp"
+        android:layout_marginTop="360dp"
         android:text="Atraso:"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -202,7 +202,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="402dp"
+        android:layout_marginTop="407dp"
         android:layout_marginEnd="26dp"
         android:layout_marginRight="26dp"
         android:ems="10"
@@ -326,20 +326,6 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txtEDireccion7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginTop="705dp"
-        android:text="Sueldo a recibir:"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/set_txtSueldoTotal"
         android:layout_width="201dp"
         android:layout_height="wrap_content"
@@ -348,7 +334,21 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="184dp"
         android:layout_marginLeft="184dp"
-        android:layout_marginTop="704dp"
+        android:layout_marginTop="720dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtEDireccion7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="721dp"
+        android:text="Sueldo a recibir:"
         android:textSize="20sp"
         android:textStyle="bold" />
 
