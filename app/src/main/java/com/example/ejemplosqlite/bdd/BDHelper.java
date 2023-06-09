@@ -15,7 +15,7 @@ public class BDHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //CREACIÓN DE LAS TABLAS
             db.execSQL("CREATE TABLE t_RolPagos"+"(" +
-                    "usu_funcionario PRIMARY KEY,"+
+                    "usu_funcionario text PRIMARY KEY,"+
                     "usu_cargo text NOT NULL,"+
                     "usu_area text NOT NULL," +
                     "usu_nHijos integer NOT NULL,"+
