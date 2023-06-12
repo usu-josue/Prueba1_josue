@@ -13,6 +13,14 @@ import android.widget.Toast;
 import com.example.ejemplosqlite.bdd.BDHelper;
 
 public class MainActivity extends AppCompatActivity {
+    //variables globales
+    double sueldoFijo = 0;
+    double subsidio = 0;
+    double Bonificacion = 0;
+    double atrasoss = 0;
+    double resultTotalSueldo = 0;
+
+    //variables para la insercción
     EditText et_funcionarios, et_cargo, et_area, et_nHijos, et_estadoC, et_atraso, et_horasExtras;
 
     @Override
@@ -28,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         et_estadoC=findViewById(R.id.txtEstadoCivil);
         et_atraso=findViewById(R.id.txtAtraso);
         et_horasExtras=findViewById(R.id.txtHorasExtras);
+
     }
 
     public void registrar(View view){
@@ -55,7 +64,15 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "REGISTRO EXITOSO", Toast.LENGTH_SHORT).show();
 
             //mostrar los calculos en los campos posteriores al botón
-            this.Mostrar();
+            //this.Mostrar();
+
+            //textView
+            TextView setsubsidio = findViewById(R.id.set_txtSubsidio);
+            TextView setDescuento = findViewById(R.id.set_txtDescuentoA);
+            TextView setBonificacion = findViewById(R.id.set_txtBonificacion);
+            TextView setHorExtra = findViewById(R.id.set_txtHorasE);
+            TextView setSueldoTotal = findViewById(R.id.set_txtSueldoTotal);
+
 
             //Vaciar los campos de ingreso
             et_funcionarios.setText("");
@@ -65,24 +82,81 @@ public class MainActivity extends AppCompatActivity {
             et_estadoC.setText("");
             et_atraso.setText("");
             et_horasExtras.setText("");
+            //Enviar datos en los textView de calculos
+            sueldoFijo = this.Calculosubsidio(cargo);
+            setsubsidio.setText(sueldoFijo+"");
+            subsidio = this.DescuxAtraso(atraso);
+            setDescuento.setText(subsidio+"");
+            Bonificacion = this.Calculobonificacion(Integer.parseInt(nHijos));
+            setBonificacion.setText(Bonificacion+"");
+            atrasoss = this.CalculoHorasExtras(Double.parseDouble(horasExtras));
+            setHorExtra.setText(atrasoss+"");
+            resultTotalSueldo = this.TotaldeSueldo(sueldoFijo,subsidio,Bonificacion,atrasoss);
+            setSueldoTotal.setText(resultTotalSueldo+"");
+
+
+
             //cerrar conexión
             bd.close();
         }else{
             Toast.makeText(this,"FAVOR INGRESAR TODOS LOS CAMPOS",Toast.LENGTH_SHORT).show();
         }
-
     }
 
+    public double Calculosubsidio (String cargo) {
+        double sueldo = 0;
+        if (cargo.equals("Administrativo")==true){
+            sueldo = 880;
+        }else if (cargo.equals("Docente")==true) {
+            sueldo = 1000;
+        }
+        return sueldo;
+    }
+
+    public double Calculobonificacion (int nro_hijos) {
+        double bonificacion=0;
+        if (nro_hijos>0) {
+            bonificacion = nro_hijos * 50;
+        }else{
+            bonificacion = 0;
+        }
+        return bonificacion;
+    }
+
+    public double DescuxAtraso (String Atraso) {
+        double descuento = 0;
+        if (Atraso.equals("Si")) {
+            descuento = (sueldoFijo*8)/100;
+        }else if (Atraso.equals("No")) {
+            descuento = 0;
+        }
+        return descuento;
+    }
+
+    public double CalculoHorasExtras (double horas) {
+        double hextra = 0;
+        if (horas>0) {
+            hextra = horas * 12;
+        }else{
+            return hextra = 0;
+        }
+        return hextra;
+    }
+
+    public double TotaldeSueldo (double suel_fijo, double sub_fidio, double boni_ficacion, double hor_extra) {
+        double resultadoTotal = suel_fijo+sub_fidio+boni_ficacion+hor_extra;
+        return resultadoTotal;
+    }
+    /*
     private void Mostrar() {
         EditText cargo = (EditText) findViewById(R.id.txtCargo);
         float sueldofijo = 0;
         EditText numeroHijos  = (EditText) findViewById(R.id.txtnHijos);
         EditText atrasos  = (EditText) findViewById(R.id.txtAtraso);
         float descuentosueldof = 0;
-
         EditText horasExtras = (EditText) findViewById(R.id.txtHorasExtras);
 
-        //condición de cargo para determinar Subsidio
+        //validación de cargo para determinar Subsidio
         TextView setsubsidio = findViewById(R.id.set_txtSubsidio);
         if(cargo.getText().toString().equals("administrativo")) {
             sueldofijo = 880;
@@ -94,31 +168,38 @@ public class MainActivity extends AppCompatActivity {
             setsubsidio.setText("Error, no es docente ni administrativo");
         }
 
-
-        //Valicación de atraso para descontar el valor del subsidio
-        TextView setDescuento = findViewById(R.id.set_txtDescuentoA);
-        if (atrasos.getText().toString().equals("Si")) {
-            descuentosueldof = (sueldofijo * 8)/100;
-            setDescuento.setText("-"+"$"+descuentosueldof);
-        }else if (atrasos.getText().toString().equals("No")) {
-            setDescuento.setText("No hay descuento");
+        //Verificar si es docente o administrativo para evitar los calculos erróneos.
+        if (!cargo.getText().toString().equals("administrativo") || !cargo.getText().toString().equals("docente")){
+            setsubsidio.setText("Funcionario no determinado correctamente");
         }else{
-            setDescuento.setText("No ha determinado correctamente");
+
+            //Valicación de atraso para descontar el valor del subsidio
+            TextView setDescuento = findViewById(R.id.set_txtDescuentoA);
+            if (atrasos.getText().toString().equals("Si")) {
+                descuentosueldof = (sueldofijo * 8)/100;
+                setDescuento.setText("-"+"$"+descuentosueldof);
+            }else if (atrasos.getText().toString().equals("No")) {
+                setDescuento.setText("No hay descuento");
+            }else{
+                setDescuento.setText("No ha determinado correctamente");
+            }
+
+            //Bonificacion x numero de hijos
+            float bonificacion = 50 * Float.parseFloat(numeroHijos.getText().toString());
+            TextView setbonificacion = findViewById(R.id.set_txtBonificacion);
+            setbonificacion.setText("+"+"$"+bonificacion);
+
+            //Horas extras
+            float totalhoras = 12 * Float.parseFloat(horasExtras.getText().toString());
+            TextView horasEx = findViewById(R.id.set_txtHorasE);
+            horasEx.setText("+"+"$"+totalhoras);
+
+            float total = (sueldofijo-descuentosueldof)+bonificacion+totalhoras;
+            TextView mostrarfinal = findViewById(R.id.set_txtSueldoTotal);
+            mostrarfinal.setText(total+" "+"USD");
         }
 
-        //Bonificacion x numero de hijos
-        float bonificacion = 50 * Float.parseFloat(numeroHijos.getText().toString());
-        TextView setbonificacion = findViewById(R.id.set_txtBonificacion);
-        setbonificacion.setText("+"+"$"+bonificacion);
-
-        //Horas extras
-        float totalhoras = 12 * Float.parseFloat(horasExtras.getText().toString());
-        TextView horasEx = findViewById(R.id.set_txtHorasE);
-        horasEx.setText("+"+"$"+totalhoras);
-
-        float total = (sueldofijo-descuentosueldof)+bonificacion+totalhoras;
-        TextView mostrarfinal = findViewById(R.id.set_txtSueldoTotal);
-        mostrarfinal.setText(total+" "+"USD");
-
     }
+
+     */
 }
