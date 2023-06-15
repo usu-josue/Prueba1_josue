@@ -253,27 +253,7 @@
 
     <Button
         android:id="@+id/btnCrear"
-        android:layout_width="wrap_content"
-        android:layout_height="53dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="131dp"
-        android:layout_marginLeft="131dp"
-        android:layout_marginTop="512dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginRight="144dp"
-        android:layout_marginBottom="242dp"
-        android:onClick="registrarDatos"
-        android:text="MOSTRAR"
-        app:rippleColor="@color/black" />
-
-    <Button
-        android:id="@+id/btnCrear2"
-        android:layout_width="wrap_content"
+        android:layout_width="104dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -281,12 +261,51 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="510dp"
-        android:layout_marginEnd="269dp"
-        android:layout_marginRight="269dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="499dp"
+        android:layout_marginEnd="154dp"
+        android:layout_marginRight="154dp"
+        android:layout_marginBottom="244dp"
+        android:onClick="MostrarDatos"
+        android:text="MOSTRAR"
+        app:rippleColor="@color/black" />
+
+    <Button
+        android:id="@+id/btnCrear3"
+        android:layout_width="127dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="266dp"
+        android:layout_marginLeft="266dp"
+        android:layout_marginTop="499dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="244dp"
+        android:text="ACTUALIZAR"
+        app:rippleColor="@color/black" />
+
+    <Button
+        android:id="@+id/btnCrear2"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="499dp"
+        android:layout_marginEnd="287dp"
+        android:layout_marginRight="287dp"
+        android:layout_marginBottom="244dp"
         android:onClick="registrar"
         android:text="GUARDAR"
         app:rippleColor="@color/black" />
@@ -360,29 +379,29 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/set_txtSueldoTotal"
-        android:layout_width="201dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="185dp"
-        android:layout_marginLeft="185dp"
-        android:layout_marginTop="752dp"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/txtEDireccion7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="753dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="738dp"
         android:text="Sueldo a recibir:"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/set_txtSueldoTotal"
+        android:layout_width="201dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="184dp"
+        android:layout_marginLeft="184dp"
+        android:layout_marginTop="737dp"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -425,5 +444,24 @@
         android:layout_marginTop="581dp"
         android:textSize="20sp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="304dp"
+        android:layout_marginLeft="304dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="747dp"
+        android:onClick="Limpiar"
+        android:text="Clear" />
 
 </RelativeLayout>

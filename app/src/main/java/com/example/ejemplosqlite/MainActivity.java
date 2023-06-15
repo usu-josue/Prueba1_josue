@@ -41,8 +41,15 @@ public class MainActivity extends AppCompatActivity {
         et_horasExtras=findViewById(R.id.txtHorasExtras);
 
     }
-    public void mostrar(View view){
-
+    public void Limpiar(View view){
+        et_cedula.setText("");
+        et_funcionarios.setText("");
+        et_cargo.setText("");
+        et_area.setText("");
+        et_nHijos.setText("");
+        et_estadoC.setText("");
+        et_atraso.setText("");
+        et_horasExtras.setText("");
     }
     public void registrar(View view){
         BDHelper admin=new BDHelper(this,"registro.db",null,1);
@@ -105,20 +112,19 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"FAVOR INGRESAR TODOS LOS CAMPOS",Toast.LENGTH_SHORT).show();
         }
     }
-
-
-    public void MostrarDatos (View view, int cedula) {
+    public void MostrarDatos (View view) {
         BDHelper admin = new BDHelper(this, "registro.db", null, 2);
         SQLiteDatabase bd = admin.getReadableDatabase();
+        String cedula = et_cedula.getText().toString();
 
-        if (!et_cedula.getText().toString().isEmpty()) {
+        if (!cedula.isEmpty()) {
 
             // Define las columnas que deseas recuperar
             String[] columnas = {"usu_cedula", "usu_funcionario", "usu_cargo", "usu_area", "usu_nHijos", "usu_estadoCivil", "usu_atraso", "usu_horasExtras"};
 
             // Define la cláusula con el parametro cedula, WHERE para seleccionar el registro con el ID correspondiente
             String whereClause = "usu_cedula = ?";
-            String[] whereArgs = new String[] {String.valueOf(cedula)};
+            String[] whereArgs = new String[] {cedula};
 
             // Realiza la consulta
             Cursor cursor = bd.query("t_RolPagos", columnas, whereClause, whereArgs, null, null, null);
@@ -149,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"INGRESE LA CEDULA DEL FUNCIONARIO",Toast.LENGTH_SHORT).show();
         }
     }
-
+    
 
     public double Calculosubsidio (String cargo) {
         double sueldo = 0;
