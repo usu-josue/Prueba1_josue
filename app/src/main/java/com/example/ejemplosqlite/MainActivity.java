@@ -41,20 +41,14 @@ public class MainActivity extends AppCompatActivity {
         et_horasExtras=findViewById(R.id.txtHorasExtras);
 
     }
-    public void Limpiar(View view){
+    public void Clear(View view){
         et_cedula.setText("");
-        et_funcionarios.setText("");
-        et_cargo.setText("");
-        et_area.setText("");
-        et_nHijos.setText("");
-        et_estadoC.setText("");
-        et_atraso.setText("");
-        et_horasExtras.setText("");
+        LimpiaConsultas();
     }
     public void registrar(View view){
         BDHelper admin=new BDHelper(this,"registro.db",null,1);
         SQLiteDatabase bd=admin.getWritableDatabase();
-        //Conectar backend con SQLite
+        //Conectar backend con variables String para el SQLite
         String cedula = et_cedula.getText().toString();
         String funcionario=et_funcionarios.getText().toString();
         String cargo=et_cargo.getText().toString();
@@ -155,7 +149,60 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"INGRESE LA CEDULA DEL FUNCIONARIO",Toast.LENGTH_SHORT).show();
         }
     }
-    
+    public void ActualizarDatos(View view) {
+        BDHelper admin = new BDHelper(this, "registro.db", null, 2);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+
+        //Conectar backend con variables String para el SQLite
+        String cedula = et_cedula.getText().toString();
+        String funcionario = et_funcionarios.getText().toString();
+        String cargo = et_cargo.getText().toString();
+        String area = et_area.getText().toString();
+        String nHijos = et_nHijos.getText().toString();
+        String estadoCivil = et_estadoC.getText().toString();
+        String atraso = et_atraso.getText().toString();
+        String horasExtras = et_horasExtras.getText().toString();
+
+        if (!cedula.isEmpty() && !funcionario.isEmpty() && !cargo.isEmpty() && !area.isEmpty() && !nHijos.isEmpty() && !estadoCivil.isEmpty() && !atraso.isEmpty() && !horasExtras.isEmpty()) {
+
+            ContentValues valores = new ContentValues();
+            valores.put("usu_funcionario", funcionario);
+            valores.put("usu_cargo", cargo);
+            valores.put("usu_area", area);
+            valores.put("usu_nHijos", nHijos);
+            valores.put("usu_estadoCivil", estadoCivil);
+            valores.put("usu_atraso", atraso);
+            valores.put("usu_horasExtras", horasExtras);
+
+            // Definir la cláusula WHERE para identificar el registro a actualizar (por ejemplo, basado en un ID único)
+            String whereClause = "usu_cedula = ?";
+            String[] whereArgs = new String[] {cedula};
+
+            // Ejecutar la actualización
+            int filasActualizadas = bd.update("t_RolPagos", valores, whereClause, whereArgs);
+
+            if (filasActualizadas > 0) {
+                Toast.makeText(this, "ACTUALIZACIÓN EXITOSA", Toast.LENGTH_SHORT).show();
+                this.LimpiaConsultas();
+            } else {
+                Toast.makeText(this, "NO SE PUDO ACTUALIZAR EL REGISTRO", Toast.LENGTH_SHORT).show();
+            }
+
+            bd.close();
+        } else {
+            Toast.makeText(this, "PRIMERO HAZ UNA CONSULTA AL USUARIO", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void LimpiaConsultas() {
+        et_funcionarios.setText("");
+        et_cargo.setText("");
+        et_area.setText("");
+        et_nHijos.setText("");
+        et_estadoC.setText("");
+        et_atraso.setText("");
+        et_horasExtras.setText("");
+    }
 
     public double Calculosubsidio (String cargo) {
         double sueldo = 0;
