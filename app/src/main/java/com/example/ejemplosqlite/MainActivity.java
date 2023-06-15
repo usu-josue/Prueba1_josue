@@ -2,7 +2,9 @@ package com.example.ejemplosqlite;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -21,14 +23,15 @@ public class MainActivity extends AppCompatActivity {
     double resultTotalSueldo = 0;
 
     //variables para la insercción
-    EditText et_funcionarios, et_cargo, et_area, et_nHijos, et_estadoC, et_atraso, et_horasExtras;
+    EditText et_cedula ,et_funcionarios, et_cargo, et_area, et_nHijos, et_estadoC, et_atraso, et_horasExtras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //UNIR ELEMENT0S DE BACK CON FRONT
+        //UNIR ELEMENT0S DEL FRONT CON EL BACKEND
+        et_cedula=findViewById(R.id.txtCedula);
         et_funcionarios=findViewById(R.id.txtFuncionario);
         et_cargo=findViewById(R.id.txtCargo);
         et_area=findViewById(R.id.txtArea);
@@ -38,10 +41,14 @@ public class MainActivity extends AppCompatActivity {
         et_horasExtras=findViewById(R.id.txtHorasExtras);
 
     }
+    public void mostrar(View view){
 
+    }
     public void registrar(View view){
         BDHelper admin=new BDHelper(this,"registro.db",null,1);
         SQLiteDatabase bd=admin.getWritableDatabase();
+        //Conectar backend con SQLite
+        String cedula = et_cedula.getText().toString();
         String funcionario=et_funcionarios.getText().toString();
         String cargo=et_cargo.getText().toString();
         String area=et_area.getText().toString();
@@ -50,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
         String atraso=et_atraso.getText().toString();
         String horasExtras=et_horasExtras.getText().toString();
 
-        if(!funcionario.isEmpty() && !cargo.isEmpty() && !area.isEmpty() && !nHijos.isEmpty() && !estadoCivil.isEmpty() && !atraso.isEmpty() && !horasExtras.isEmpty()){
+        if(!cedula.isEmpty() && !funcionario.isEmpty() && !cargo.isEmpty() && !area.isEmpty() && !nHijos.isEmpty() && !estadoCivil.isEmpty() && !atraso.isEmpty() && !horasExtras.isEmpty()){
             ContentValues registro=new ContentValues();
+            registro.put("usu_cedula",cedula);
             registro.put("usu_funcionario",funcionario);
             registro.put("usu_cargo",cargo);
             registro.put("usu_area",area);
@@ -62,26 +70,14 @@ public class MainActivity extends AppCompatActivity {
 
             bd.insert("t_RolPagos",null,registro);
             Toast.makeText(this, "REGISTRO EXITOSO", Toast.LENGTH_SHORT).show();
-
             //mostrar los calculos en los campos posteriores al botón
             //this.Mostrar();
-
             //textView
             TextView setsubsidio = findViewById(R.id.set_txtSubsidio);
             TextView setDescuento = findViewById(R.id.set_txtDescuentoA);
             TextView setBonificacion = findViewById(R.id.set_txtBonificacion);
             TextView setHorExtra = findViewById(R.id.set_txtHorasE);
             TextView setSueldoTotal = findViewById(R.id.set_txtSueldoTotal);
-
-
-            //Vaciar los campos de ingreso
-            et_funcionarios.setText("");
-            et_cargo.setText("");
-            et_area.setText("");
-            et_nHijos.setText("");
-            et_estadoC.setText("");
-            et_atraso.setText("");
-            et_horasExtras.setText("");
             //Enviar datos en los textView de calculos
             sueldoFijo = this.Calculosubsidio(cargo);
             setsubsidio.setText(sueldoFijo+"");
@@ -93,26 +89,77 @@ public class MainActivity extends AppCompatActivity {
             setHorExtra.setText(atrasoss+"");
             resultTotalSueldo = this.TotaldeSueldo(sueldoFijo,subsidio,Bonificacion,atrasoss);
             setSueldoTotal.setText(resultTotalSueldo+"");
-
-
-
+            //Vaciar los campos de ingreso
+            et_cedula.setText("");
+            et_funcionarios.setText("");
+            et_cargo.setText("");
+            et_area.setText("");
+            et_nHijos.setText("");
+            et_estadoC.setText("");
+            et_atraso.setText("");
+            et_horasExtras.setText("");
             //cerrar conexión
             bd.close();
+
         }else{
             Toast.makeText(this,"FAVOR INGRESAR TODOS LOS CAMPOS",Toast.LENGTH_SHORT).show();
         }
     }
 
+
+    public void MostrarDatos (View view, int cedula) {
+        BDHelper admin = new BDHelper(this, "registro.db", null, 2);
+        SQLiteDatabase bd = admin.getReadableDatabase();
+
+        if (!et_cedula.getText().toString().isEmpty()) {
+
+            // Define las columnas que deseas recuperar
+            String[] columnas = {"usu_cedula", "usu_funcionario", "usu_cargo", "usu_area", "usu_nHijos", "usu_estadoCivil", "usu_atraso", "usu_horasExtras"};
+
+            // Define la cláusula con el parametro cedula, WHERE para seleccionar el registro con el ID correspondiente
+            String whereClause = "usu_cedula = ?";
+            String[] whereArgs = new String[] {String.valueOf(cedula)};
+
+            // Realiza la consulta
+            Cursor cursor = bd.query("t_RolPagos", columnas, whereClause, whereArgs, null, null, null);
+
+            if (cursor.moveToFirst()) {
+                // Obtén los valores de las columnas del cursor
+                @SuppressLint("Range") String funcionario = cursor.getString(cursor.getColumnIndex("usu_funcionario"));
+                @SuppressLint("Range") String cargo = cursor.getString(cursor.getColumnIndex("usu_cargo"));
+                @SuppressLint("Range") String area = cursor.getString(cursor.getColumnIndex("usu_area"));
+                @SuppressLint("Range") String nHijos = cursor.getString(cursor.getColumnIndex("usu_nHijos"));
+                @SuppressLint("Range") String estadoCivil = cursor.getString(cursor.getColumnIndex("usu_estadoCivil"));
+                @SuppressLint("Range") String atraso = cursor.getString(cursor.getColumnIndex("usu_atraso"));
+                @SuppressLint("Range") String horasExtras = cursor.getString(cursor.getColumnIndex("usu_horasExtras"));
+
+                // Muestra los valores en los campos correspondientes
+                et_funcionarios.setText(funcionario);
+                et_cargo.setText(cargo);
+                et_area.setText(area);
+                et_nHijos.setText(nHijos);
+                et_estadoC.setText(estadoCivil);
+                et_atraso.setText(atraso);
+                et_horasExtras.setText(horasExtras);
+            }
+            cursor.close();
+            bd.close();
+
+        }else{
+            Toast.makeText(this,"INGRESE LA CEDULA DEL FUNCIONARIO",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
     public double Calculosubsidio (String cargo) {
         double sueldo = 0;
-        if (cargo.equals("Administrativo")==true){
+        if (cargo.equals("administrativo")==true){
             sueldo = 880;
-        }else if (cargo.equals("Docente")==true) {
+        }else if (cargo.equals("docente")==true) {
             sueldo = 1000;
         }
         return sueldo;
     }
-
     public double Calculobonificacion (int nro_hijos) {
         double bonificacion=0;
         if (nro_hijos>0) {
@@ -122,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return bonificacion;
     }
-
     public double DescuxAtraso (String Atraso) {
         double descuento = 0;
         if (Atraso.equals("Si")) {
@@ -132,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return descuento;
     }
-
     public double CalculoHorasExtras (double horas) {
         double hextra = 0;
         if (horas>0) {
@@ -142,9 +187,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return hextra;
     }
-
     public double TotaldeSueldo (double suel_fijo, double sub_fidio, double boni_ficacion, double hor_extra) {
-        double resultadoTotal = suel_fijo+sub_fidio+boni_ficacion+hor_extra;
+        double resultadoTotal = (suel_fijo - sub_fidio) + boni_ficacion + hor_extra;
         return resultadoTotal;
     }
     /*
@@ -198,8 +242,6 @@ public class MainActivity extends AppCompatActivity {
             TextView mostrarfinal = findViewById(R.id.set_txtSueldoTotal);
             mostrarfinal.setText(total+" "+"USD");
         }
-
     }
-
      */
 }

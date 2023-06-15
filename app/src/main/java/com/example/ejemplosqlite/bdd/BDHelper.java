@@ -8,14 +8,15 @@ import androidx.annotation.Nullable;
 
 public class BDHelper extends SQLiteOpenHelper {
     public BDHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+        super(context, name, factory, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         //CREACIÓN DE LAS TABLAS
             db.execSQL("CREATE TABLE t_RolPagos"+"(" +
-                    "usu_funcionario text PRIMARY KEY,"+
+                    "usu_cedula integer PRIMARY KEY,"+
+                    "usu_funcionario text NOT NULL,"+
                     "usu_cargo text NOT NULL,"+
                     "usu_area text NOT NULL," +
                     "usu_nHijos integer NOT NULL,"+
@@ -28,7 +29,8 @@ public class BDHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //CAMBIE LA VERSIÓN DE LA TABLA DE LA BDD
-        db.execSQL("DROP TABLE t_RolPagos");
+        //db.execSQL("DROP TABLE t_RolPagos");
+        db.execSQL("DROP TABLE IF EXISTS t_RolPagos");
         onCreate(db);
     }
 }
