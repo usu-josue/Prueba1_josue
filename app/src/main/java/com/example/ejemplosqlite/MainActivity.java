@@ -143,11 +143,11 @@ public class MainActivity extends AppCompatActivity {
                 et_horasExtras.setText(horasExtras);
             }
             cursor.close();
-            bd.close();
 
         }else{
             Toast.makeText(this,"INGRESE LA CEDULA DEL FUNCIONARIO",Toast.LENGTH_SHORT).show();
         }
+        bd.close();
     }
     public void ActualizarDatos(View view) {
         BDHelper admin = new BDHelper(this, "registro.db", null, 2);
@@ -187,10 +187,33 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "NO SE PUDO ACTUALIZAR EL REGISTRO", Toast.LENGTH_SHORT).show();
             }
-
-            bd.close();
         } else {
             Toast.makeText(this, "PRIMERO HAZ UNA CONSULTA AL USUARIO", Toast.LENGTH_SHORT).show();
+        }
+        bd.close();
+    }
+    public void EliminarDatos(View view) {
+        BDHelper admin = new BDHelper(this, "registro.db", null, 2);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        String cedula = et_cedula.getText().toString();
+
+        if (!cedula.isEmpty()) {
+            String whereClause = "usu_cedula = ?";
+            String[] whereArgs = new String[] {cedula};
+
+            // Realiza la eliminación
+            int filasEliminadas = bd.delete("t_RolPagos", whereClause, whereArgs);
+
+            if (filasEliminadas > 0) {
+                Toast.makeText(this, "ELIMINACIÓN EXITOSA", Toast.LENGTH_SHORT).show();
+                //Limpiar campos
+                this.LimpiaConsultas();
+            } else {
+                Toast.makeText(this, "NO SE PUDO ELIMINAR EL REGISTRO", Toast.LENGTH_SHORT).show();
+            }
+            bd.close();
+        }else{
+            Toast.makeText(this,"INGRESE LA CEDULA DEL FUNCIONARIO",Toast.LENGTH_SHORT).show();
         }
     }
 

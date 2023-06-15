@@ -252,7 +252,7 @@
         tools:text="@string/txtHorasExtras" />
 
     <Button
-        android:id="@+id/btnCrear"
+        android:id="@+id/btn_mostrar"
         android:layout_width="104dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -272,7 +272,7 @@
         app:rippleColor="@color/black" />
 
     <Button
-        android:id="@+id/btnCrear3"
+        android:id="@+id/btn_update"
         android:layout_width="127dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -292,7 +292,7 @@
         app:rippleColor="@color/black" />
 
     <Button
-        android:id="@+id/btnCrear2"
+        android:id="@+id/btn_save"
         android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -447,22 +447,36 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:id="@+id/btn_clear"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="304dp"
-        android:layout_marginLeft="304dp"
+        android:layout_marginStart="316dp"
+        android:layout_marginLeft="316dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
         android:layout_marginBottom="747dp"
         android:onClick="Clear"
         android:text="Clear" />
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="14dp"
+        android:onClick="EliminarDatos"
+        android:text="D" />
+
 
 </RelativeLayout>
